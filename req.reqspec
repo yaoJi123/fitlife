@@ -1,0 +1,20 @@
+system requirements Javolutionreq :"Requirements for fitbit"
+for fitbit::fitbit
+[
+	val Fit_Power = 50 W
+	val Fit_gap = 0.01 sec 
+	
+	requirement R1 : "power" [
+		description "the power of system must be stable" 
+            Fit_Power "power"
+            see goal FITBITgoals.g1
+	]
+	
+	requirement R1_1 : "gap" [
+		description "the gap between heart beat testing must less then" 
+            Fit_gap "gap"
+            see goal FITBITgoals.g1
+	]
+
+    
+]

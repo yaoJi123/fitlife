@@ -1,0 +1,43 @@
+package errLibrary
+public
+annex EMV2 {**
+	error types
+		NoValue : type;
+		BadValue : type;
+		LateValue : type;
+		OutOfRange: type;
+	end types;
+		
+	error behavior ThreeErrorStates
+		events
+			BadValueEvent: error event;
+			NoValueEvent: error event;
+			LateValueEvent: error event;
+		states
+			Operational: initial state;
+			BadValueState: state;
+			NoValueState : state;
+			LateValueState: state;
+		transitions 
+			BadValueTransition : Operational -[BadValueEvent]-> BadValueState;
+			NoValueTransition : Operational -[NoValueEvent]-> NoValueState;
+			LateTransition : Operational-[LateValueEvent]->LateValueState;
+	end behavior;
+	
+	error behavior Controller
+	events
+		Failure 			: error event;
+		fixed           	: recover event;
+		ResetEvent			: recover event;		
+	states
+		workswell 		: initial state;
+		alart               : state;
+		powerdown 	: state;
+	transitions
+		transerr : workswell 	-[ Failure ]-> alart ;
+		trerst   : alart        -[ ResetEvent ]-> workswell;
+		treset2  : powerdown 	-[ fixed ]-> workswell;
+		
+	end behavior;	
+**};
+end errLibrary;

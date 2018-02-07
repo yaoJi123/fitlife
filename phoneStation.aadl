@@ -1,0 +1,88 @@
+package phoneStation
+
+-- blueTooth for the communication between wristband
+public
+	system phoneStation
+		features
+			blueTOut: out event port;
+			blueTIn: in event port;
+	end phoneStation;
+
+
+system implementation phoneStation.with_devices
+	subcomponents
+		controllor: system controllor;
+		screen: device screen;
+	connections
+		c1:port controllor.bluetoothPortOut -> blueTOut;
+		c2:port blueTIn -> controllor.bluetoothPortIn;
+		c3:port controllor.screenOut -> Screen.screenIn;
+		c4:port Screen.screenKeyborad -> controllor.screenIn;
+end phoneStation.with_devices;
+	
+system controllor
+	features
+		screenOut: out event port;
+		screenIn: in event port;
+		bluetoothPortOut: out event port;
+		bluetoothPortIn: in event port;
+	modes
+		normal: initial mode;
+		alart: mode;
+end controllor;
+
+system implementation controllor.impl
+	subcomponents
+		CPU: device CPU;
+		Memo:memory Memo;
+		bluetooth: device bluetooth;
+	connections
+		cnnSO: port CPU.screendataOut -> screenOut;
+		cnnSI: port screenIn -> CPU.screenkeyboardIn;
+		cnnMO: port CPU.memorydataOut -> Memo.dataIn;
+		cnnMI: port Memo.dataOut -> CPU.memorydataIn;
+		--bluetooth inside/outside connection
+		cnnBDO: port CPU.bluetoothOut -> Bluetooth.btdataIn;
+		cnnBDI: port Bluetooth.btdataOut -> CPU.bluetoothIn;
+		cnnBPO: port Bluetooth.btportOut -> bluetoothPortOut;
+		cnnBPI: port bluetoothportIn -> Bluetooth.btportIn;
+end controllor.impl;
+
+--devices: CPU Bluetooth memory screen
+
+device CPU
+	features
+		screendataOut: out event port;
+		screenkeyboardIn: in event port;
+		memorydataOut: out data port;
+		memorydataIn: in data port;
+		bluetoothOut: out event port;
+		bluetoothIn: in event port;
+
+end CPU;
+
+device Bluetooth
+	features 
+		btdataIn: in event port;
+		btdataOut: out event port;
+		btportIn: in event port;
+		btportOut: out event port;
+end bluetooth;
+
+memory Memo
+	features
+		dataIn: in data port;
+		dataOut: out data port;
+end Memo;
+
+device Screen
+	features
+		ScreenIn: in event port;
+		ScreenKeyborad: out event port;
+end Screen;
+device implementation Screen.impl
+	
+end Screen.impl;
+	
+	
+end phoneStation;

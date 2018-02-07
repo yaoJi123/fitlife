@@ -1,0 +1,8 @@
+organization fitbit
+stakeholder Yao [
+	full name "Yao Ji"
+	
+]
+stakeholder fei [
+	full name "Pei Fei"
+]

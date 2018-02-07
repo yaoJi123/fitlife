@@ -1,0 +1,28 @@
+package resolute_examples
+
+public
+	
+annex resolute {**
+	CheckSeppdLevel(p : component) <=
+  		** " Check threads in component " p **
+		forall(cnn : connection). contained(cnn, p) => check_connectionSpeed (cnn)
+
+	check_connectionSpeed(cnn : connection) <=
+  	** "The thread " cnn " as a speed bigger than 0"  **
+  		(has_property (cnn, resoluteps::speedLevel)) and 
+  		(property (cnn, resoluteps::speedLevel) > 0)
+
+
+
+	minfoobarvalue(c : component) <=
+  		** " Check the data_integrity for features on " c  **
+		forall (conn : connections (c)) . has_property (source(conn), resoluteps::data_integrity) and
+		                                  has_property (destination(conn), resoluteps::data_integrity) => 
+		(property(source(conn), resoluteps::data_integrity) < property(destination(conn), resoluteps::data_integrity))
+
+  	
+
+
+**};
+	
+end resolute_examples;

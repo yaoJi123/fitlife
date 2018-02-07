@@ -1,0 +1,15 @@
+property set resoluteps is
+	speedLevel : aadlinteger applies to (all);
+	
+	slow : constant aadlinteger => 0;
+	mid : constant aadlinteger => 1;
+	fast : constant aadlinteger => 2;
+	
+--  	trigger : aadlboolean applies to (all);
+  	
+    data_integrity: aadlinteger applies to (all);
+    
+    low: constant aadlinteger => 0;
+    high: constant aadlinteger => 1; 
+
+end resoluteps; 

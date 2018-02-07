@@ -1,0 +1,33 @@
+stakeholder goals FITBITgoals : "fitbit stakeholder goals" for system [
+	description "This document contains the stakeholder requirements for the wristband.
+                 FITBIT provides control for a relatively simple device (SD). 
+                 FITBIT consists of software, hardware, and humans."
+	goal g1 : "Reliability" [
+		description "The simple controller (SC) shall provide relible control of PACE."
+		rationale "PACE is a safety critical device that cannot tolerate unreliable behavior."
+		stakeholder fitbit.Yao
+		category Quality.Safety 
+	uncertainty[
+		volatility 2
+		impact 3	
+		
+	]
+	
+	
+	]
+	
+	goal g2 : "Security" [
+		description "wristband should Protect customer¡®s¡¯ privacy ."
+		rationale "fitbit is a safety critical device that can protect customer¡®s¡¯ privacy."
+		stakeholder fitbit.Yao
+		category Quality.Safety 
+	uncertainty[
+		volatility 2
+		impact 3	
+		
+	]
+	
+	
+	]
+	
+	]
